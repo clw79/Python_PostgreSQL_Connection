@@ -64,10 +64,19 @@ pipeline {
                     echo "Activating virtual environment..."
                     . .venv/bin/activate
 
+                    echo "Creating reports directory..."
+                    mkdir -p reports
+
                     echo "Running pytest..."
-                    python -m pytest
+                    python -m pytest --junitxml=reports/pytest-results.xml
                 '''
             }
+        }
+    }
+
+    post {
+        always {
+            junit 'reports/pytest-results.xml'
         }
     }
 }
