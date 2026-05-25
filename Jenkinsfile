@@ -75,8 +75,9 @@ pipeline {
     }
 
     post {
-        always {
-            junit 'reports/pytest-results.xml'
-        }
+    always {
+        junit 'reports/pytest-results.xml'
+        archiveArtifacts artifacts: 'reports/*.xml', fingerprint: true
     }
+}
 }
