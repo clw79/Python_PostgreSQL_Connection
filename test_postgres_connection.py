@@ -43,7 +43,11 @@ def test_can_insert_and_read_user():
         (test_name, test_email),
     )
 
-    new_user_id = cur.fetchone()[0]
+    row = cur.fetchone()
+
+    assert row is not None
+
+    new_user_id = row[0]
 
     cur.execute(
         """
